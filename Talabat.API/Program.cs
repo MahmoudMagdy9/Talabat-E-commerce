@@ -1,5 +1,5 @@
-
 using Microsoft.EntityFrameworkCore;
+using Talabat.API.Helpers;
 using Talabat.Core.Repositories.Contract;
 using Talabat.Infrastructure.Data;
 using Talabat.Infrastructure.Repository;
@@ -28,6 +28,23 @@ namespace Talabat.API
             //allow DI for any class implement IGenericRepository
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
+            //builder.Services.AddAutoMapper(M=>M.AddProfile(new MappingProfiles()));
+            builder.Services.AddAutoMapper(typeof(MappingProfiles));
+
+            //builder.Services.Configure<ApiBehaviorOptions>(Option =>
+            //{
+            //    Option.InvalidModelStateResponseFactory = (ActionContext)
+            //        =>
+            //    {
+            //        var errors = ActionContext.ModelState.Where(E => E.Value.Errors.Count > 0)
+            //            .SelectMany(P => P.Value.Errors).Select(C => C.ErrorMessage).ToList();
+            //        var ValidationErrorResponse = new ApiValidationErrorResponse()
+            //        {
+            //            Errors = errors
+            //        };
+            //        return new BadRequestObjectResult(ValidationErrorResponse);
+            //    };
+            //});
 
             #endregion
 
@@ -42,7 +59,7 @@ namespace Talabat.API
             var service = scope.ServiceProvider;
 
             //retrieve context to put it in DI container (GetRequiredService)
-            var _dbconetext = service.GetRequiredService<StoreContext>();
+            var dbconetext = service.GetRequiredService<StoreContext>();
             //to log the error
             var loggerFactory = service.GetRequiredService<ILoggerFactory>();
 
@@ -50,9 +67,9 @@ namespace Talabat.API
             {
 
                 //apply any pending migration
-                await _dbconetext.Database.MigrateAsync();
+                await dbconetext.Database.MigrateAsync();
                 //data seeding
-                await StoreContextSeed.SeedAsync(_dbconetext);
+                await StoreContextSeed.SeedAsync(dbconetext);
             }
             catch (Exception e)
             {
@@ -73,7 +90,7 @@ namespace Talabat.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            app.UseStaticFiles();
 
             app.MapControllers(); 
             #endregion

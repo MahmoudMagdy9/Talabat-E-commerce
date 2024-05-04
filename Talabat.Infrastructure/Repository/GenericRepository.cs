@@ -32,7 +32,7 @@ namespace Talabat.Infrastructure.Repository
 
         }
 
-        public async Task<T> GetWithSpecAsync(ISpecification<T> spec)
+        public async Task<T> GetByIdWithSpecAsync(ISpecification<T> spec)
         {
              return await ApplySecifications(spec).FirstOrDefaultAsync();
         }
