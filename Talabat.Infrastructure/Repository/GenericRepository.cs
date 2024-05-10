@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Talabat.Core.Entities;
 using Talabat.Core.Repositories.Contract;
 using Talabat.Core.Specification;
-using Talabat.Core.Specification.ProductsSepcs;
+using Talabat.Core.Specification.ProductsSpecs;
 using Talabat.Infrastructure.Data;
 
 namespace Talabat.Infrastructure.Repository
@@ -43,19 +43,25 @@ namespace Talabat.Infrastructure.Repository
         }
 
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IReadOnlyList<T>> GetAllAsync()
         {
             if(typeof(T) == typeof(Product))
-                return (IEnumerable<T>)await _dbContext.Set<Product>().Include(b=>b.Brand).Include(c=>c.Category).ToListAsync();
+                return (IReadOnlyList<T>)await _dbContext.Set<Product>().Include(b=>b.Brand).Include(c=>c.Category).ToListAsync();
 
             return await _dbContext.Set<T>().ToListAsync();
 
         }
 
-        public async Task<IEnumerable<T>> GetAllWithSpecAsync(ISpecification<T> spec)
+        public async Task<IReadOnlyList<T>> GetAllWithSpecAsync(ISpecification<T> spec)
         {
 
             return await ApplySecifications(spec).ToListAsync();
+        }
+
+        public async Task<int> GetCountAsync(ISpecification<T> spec)
+        {
+            return await ApplySecifications(spec).CountAsync();
+
         }
 
         private IQueryable<T> ApplySecifications(ISpecification<T> spec)

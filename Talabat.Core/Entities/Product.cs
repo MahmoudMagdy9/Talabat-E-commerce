@@ -10,6 +10,8 @@ namespace Talabat.Core.Entities
     {
         public string Name { get; set; }
 
+        public string Name_Normalized { get; set; }
+
         public string Description { get; set; }
 
 

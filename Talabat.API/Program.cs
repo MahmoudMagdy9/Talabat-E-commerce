@@ -91,7 +91,7 @@ namespace Talabat.API
 
             app.UseAuthorization();
             app.UseStaticFiles();
-
+            app.UseMiddleware<ProfilingMiddleware>();
             app.MapControllers(); 
             #endregion
 
