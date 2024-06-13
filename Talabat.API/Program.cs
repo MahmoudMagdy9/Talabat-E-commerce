@@ -87,26 +87,7 @@ namespace Talabat.API
             builder.Services.AddScoped(typeof(IBasketRepository), typeof(BasketRepository));
             builder.Services.AddScoped(typeof(IOrderService), typeof(OrderService));
 
-            //allow DI for any class implement IGenericRepository
-            //builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
-            //builder.Services.AddAutoMapper(M=>M.AddProfile(new MappingProfiles()));
             builder.Services.AddAutoMapper(typeof(MappingProfiles));
-
-            //builder.Services.Configure<ApiBehaviorOptions>(Option =>
-            //{
-            //    Option.InvalidModelStateResponseFactory = (ActionContext)
-            //        =>
-            //    {
-            //        var errors = ActionContext.ModelState.Where(E => E.Value.Errors.Count > 0)
-            //            .SelectMany(P => P.Value.Errors).Select(C => C.ErrorMessage).ToList();
-            //        var ValidationErrorResponse = new ApiValidationErrorResponse()
-            //        {
-            //            Errors = errors
-            //        };
-            //        return new BadRequestObjectResult(ValidationErrorResponse);
-            //    };
-            //});
 
             #endregion
 
