@@ -29,5 +29,6 @@ Talabat API is an E-commerce website built using .Net Core 8. This platform prov
 ### Installation
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Talabat-E-commerce/talabat-api.git
-   cd talabat-api
+  git clone https://github.com/MahmoudMagdy9/Talabat-E-commerce.git
+ cd Talabat-E-commerce
+
