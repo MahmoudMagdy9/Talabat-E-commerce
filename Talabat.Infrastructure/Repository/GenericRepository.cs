@@ -21,7 +21,7 @@ namespace Talabat.Infrastructure.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<T?> GetAsync(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
             //if (typeof(T) == typeof(Product))
             //    return await _dbContext.Set<Product>().Where(p => p.Id == id).Include(b => b.Brand)
@@ -32,7 +32,7 @@ namespace Talabat.Infrastructure.Repository
 
         }
 
-        public async Task<T> GetByIdWithSpecAsync(ISpecification<T> spec)
+        public async Task<T> GetEntityWithSpecAsync(ISpecification<T> spec)
         {
              return await ApplySecifications(spec).FirstOrDefaultAsync();
         }
@@ -70,19 +70,13 @@ namespace Talabat.Infrastructure.Repository
         }
 
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public void Delete(T entity) => _dbContext.Remove(entity);
 
-        public void Add(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task AddAsync(T entity) => await _dbContext.AddAsync(entity);
+   
+ 
 
-        public void Update(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        public void Update(T entity) => _dbContext.Update(entity);
+
     }
 }
