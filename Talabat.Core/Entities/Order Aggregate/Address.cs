@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Talabat.Core.Entities.Order_Aggregate
 {
-    public class Address //it's not table but will be mapping with order entity it will be order address not the user address
+    //it's not table but will be mapping with order entity it will be order address not the user address
+    public class Address 
     {
         public Address() //EF should see empty parameterless ctor when adding migrations why?  // cuz EF will use this ctor to create the table
 

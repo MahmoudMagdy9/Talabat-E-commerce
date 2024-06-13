@@ -19,9 +19,6 @@ namespace Talabat.Application
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly IPaymentService _paymentService;
-        //private readonly IGenericRepository<Product> _productRepository;
-        //private readonly IGenericRepository<DeliveryMethod> _deliveryMethodsRepository;
-        //private readonly IGenericRepository<Order> _ordersRepository;
 
         public OrderService(IBasketRepository basketRepository,
             IUnitOfWork unitOfWork,

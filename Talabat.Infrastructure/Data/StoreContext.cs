@@ -16,9 +16,7 @@ namespace Talabat.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfiguration(new ProductConfiguration());
-            //modelBuilder.ApplyConfiguration(new ProductBrandConfiguration());
-            //modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
+  
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
